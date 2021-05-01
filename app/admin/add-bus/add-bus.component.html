@@ -1,0 +1,204 @@
+<head>
+    <title>Add Bus</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <script>
+    $(document).ready(function(){
+        $('#add').click(function(){
+            var stopping=$(".stoppingPoint").val();
+            var fee=$('#fee').val();
+           // alert(task);
+           $("#details").append(
+    
+            '<tr><td>'+stopping+'</td><td>'+fee+'</td></tr>')
+        });
+    });
+    
+    </script>
+  <body>
+      <app-admin-nav></app-admin-nav>
+  
+  <div class="container-fluid">
+  
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+           <div class="panel panel-info">
+           <!-- <div class="panel-heading"><h4>Add Bus Details</h4></div> -->
+      <div class="panel-body">
+          
+          <form [formGroup]="addBusForm" #addbus (ngSubmit)="addBus()">
+             
+           <div class="form-group">
+               <label for="id"> Bus No:</label>
+               <input type="text"  class="form-control"  formControlName="busNumber" >
+                 <div class="alert alert-danger" *ngIf="(BusNumber.touched) && (BusNumber.errors?.required)">  
+                     <span *ngIf="BusNumber.errors?.required">Bus Name is Required</span>  
+                 </div>
+           </div>
+  
+        <div class="form-group">
+               <label for="id"> Route No:</label>
+               <input type="text" class="form-control"  formControlName="routeNumber" >
+               <div class="alert alert-danger" *ngIf="(RouteNumber.touched) && (RouteNumber.errors?.required)">  
+                  <span *ngIf="RouteNumber.errors?.required">Route Number is Required</span>  
+              </div>
+        </div>
+  
+        <div class="form-group">
+             <label for="myName"> Driver Name: </label>
+             <input  class="form-control"  formControlName="driverName" >
+             <div class="alert alert-danger" *ngIf="(DriverName.touched) && (DriverName.errors?.required)" >  
+              <span *ngIf="DriverName.errors?.required">Driver Number is Required</span>  
+          </div>
+        </div>
+  
+                   <div class="form-group">
+                           <label for="phone">Driver Phone Number: </label>
+                           <input type="text" class="form-control"  formControlName="driverPhoneNumber">
+                           <div class="alert alert-danger" *ngIf="(DriverPhoneNumber.touched) && (DriverPhoneNumber.errors?.required)" >  
+                              <span *ngIf="DriverPhoneNumber.errors?.required">Route Number is Required</span>  
+                          </div>
+                  </div>
+                  <div *ngIf="error1" class="alert alert-warning " role="alert">
+                    {{error1}}	
+                  </div> 
+
+                  <div *ngIf="success1" class="alert alert-success " role="alert">
+                    {{success1}}	
+                  </div>
+                  <button type="submit" value="Add" class="btn btn-primary center">Submit</button>
+     </form>
+      <hr>
+     <form  [formGroup]="addBusForm" #addbus (ngSubmit)="addStop()">
+
+         <div *ngIf="error2" class="alert alert-warning " role="alert">
+            {{error2}}	
+          </div> 
+
+          <div *ngIf="success2" class="alert alert-success " role="alert">
+            {{success2}}	
+          </div>
+
+      <div class="form-group row">
+  
+        <div class="col-sm-6">
+            <label for="stoppings">Stoppings</label>
+            <input type="text" class="form-control" id="stoppingPoint" formControlName="stoppingPoint" placeholder="Stop1">
+        </div>
+
+        <div class="col-sm-6">
+            <label for="fee">Fee</label>
+            <input type="text" class="form-control" id="fee" formControlName="fee" placeholder="Fee">
+        </div>     
+                                     
+        
+    </div><table id="details" class="table" >
+        <th>Stopping Point</th>
+        <th>Fee</th>
+    </table>
+    <button type="submit" value="Add" class="btn btn-primary center" id="add" name="add">Add</button>
+    
+    
+
+    <!-- <div class="form-group row">
+  
+        <div class="col-sm-4">
+            <label for="stoppings">Stoppings</label>
+            <input type="text" class="form-control"  formControlName="stoppingPoint" placeholder="Stop1">
+        </div>
+
+        <div class="col-sm-4">
+            <label for="fee">Fee</label>
+            <input type="text" class="form-control"  formControlName="fee" placeholder="Fee">
+        </div>                                   
+       
+    </div> -->
+  
+             <!--      <div class="form-group row">
+                      <div class="col-sm-6">
+                         
+                          <input type="text" class="form-control" id="stoppings" placeholder="Stop3">
+                      </div>
+                      <div class="col-sm-6">
+                          <input type="text" class="form-control" id="fees">
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <div class="col-sm-6">
+                         
+                          <input type="text" class="form-control" id="stoppings" placeholder="Stop4">
+                      </div>
+                      <div class="col-sm-6">
+                          <input type="text" class="form-control" id="fees">
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <div class="col-sm-6">
+                         
+                          <input type="text" class="form-control" id="stoppings" placeholder="Stop5">
+                      </div>
+                      <div class="col-sm-6">
+                          <input type="text" class="form-control" id="fees">
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <div class="col-sm-6">
+                         
+                          <input type="text" class="form-control" id="stoppings" placeholder="Stop6">
+                      </div>
+                      <div class="col-sm-6">
+                          <input type="text" class="form-control" id="fees">
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <div class="col-sm-6">
+                         
+                          <input type="text" class="form-control" id="stoppings" placeholder="Stop7">
+                      </div>
+                      <div class="col-sm-6">
+                          <input type="text" class="form-control" id="fees">
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <div class="col-sm-6">
+                         
+                          <input type="text" class="form-control" id="stoppings" placeholder="Stop8">
+                      </div>
+                      <div class="col-sm-6">
+                          <input type="text" class="form-control" id="fees">
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <div class="col-sm-6">
+                         
+                          <input type="text" class="form-control" id="stoppings" placeholder="Stop9">
+                      </div>
+                      <div class="col-sm-6">
+                          <input type="text" class="form-control" id="fees">
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <div class="col-sm-6">
+                         
+                          <input type="text" class="form-control" id="stoppings" placeholder="Stop10">
+                      </div>
+                      <div class="col-sm-6">
+                          <input type="text" class="form-control" id="fees">
+                      </div>
+                  </div> -->
+        
+      </form>
+
+    
+     
+  </div>
+  </div> 
+  </div>
+  </div>
+  </div>
+  </body>
+  
